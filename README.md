@@ -1,6 +1,6 @@
 # go-textra
 
-This is a library that translates with [minnano-jidou-honyaku@textra's](https://mt-auto-minhon-mlt.ucri.jgn-x.jp/) API.
+This is a library that translates with [みんなの自動翻訳(minnano-jidou-honyaku)@textra's](https://mt-auto-minhon-mlt.ucri.jgn-x.jp/) API.
 
 You need a [textra](https://mt-auto-minhon-mlt.ucri.jgn-x.jp/) account.
 
@@ -27,6 +27,6 @@ func main() {
 	if err != nil {
 		log.Fatal(err)
 	}
-	fmt.Println(ja)
+	fmt.Println(ja) // これはペンです。
 }
 ```
