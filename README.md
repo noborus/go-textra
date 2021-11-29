@@ -1,8 +1,8 @@
 # go-textra
 
-This is a library that translates with [minnano-jidou-honyaku@textra's](https://mt-auto-minhon-mlt.ucri.jgn-x.jp/content/help/) API.
+This is a library that translates with [minnano-jidou-honyaku@textra's](https://mt-auto-minhon-mlt.ucri.jgn-x.jp/) API.
 
-You need a textra account.
+You need a [textra](https://mt-auto-minhon-mlt.ucri.jgn-x.jp/) account.
 
 ```go
 package main
