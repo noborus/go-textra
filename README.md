@@ -21,7 +21,10 @@ var config = textra.Config{
 }
 
 func main() {
-	cli := textra.New(config)
+	cli,err := textra.New(config)
+	if err != nil {
+		log.Fatal(err)
+	}
 
 	ja, err := cli.Translate(textra.GENERAL_EN_JA, "This is a pen.")
 	if err != nil {
