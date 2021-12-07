@@ -89,6 +89,15 @@ func New(c Config) (*TexTra, error) {
 	return &api, nil
 }
 
+func (tra *TexTra) apiValues() url.Values {
+	return url.Values{
+		"access_token": []string{tra.token.AccessToken},
+		"key":          []string{tra.ClientID},
+		"name":         []string{tra.Name},
+		"type":         []string{"json"},
+	}
+}
+
 func (tra *TexTra) apiPost(values url.Values) ([]byte, error) {
 	resp, err := tra.client.PostForm(APIURL+"api/", values)
 	if err != nil {

@@ -3,18 +3,17 @@ package textra
 import (
 	"encoding/json"
 	"fmt"
-	"net/url"
 )
 
-// Machine translation request.
+// List of glossaries.
 const TERMROOT = "term_root"
 
 type TermRootRequest struct {
-	LangS  string
-	LangT  string
-	Order  string
-	Limit  int
-	Offset int
+	LangS  string `json:"lang_s"`
+	LangT  string `json:"lang_t"`
+	Order  string `json:"order"`
+	Limit  string `json:"limit"`
+	Offset string `json:"offset"`
 }
 
 type TermRootSetResult struct {
@@ -42,14 +41,17 @@ type TermRootList struct {
 }
 
 func (tra *TexTra) TermRootGet(request *TermRootRequest) ([]TermRootList, error) {
-	values := url.Values{
-		"access_token": []string{tra.token.AccessToken},
-		"key":          []string{tra.ClientID},
-		"name":         []string{tra.Name},
-		"api_name":     []string{TERMROOT},
-		"api_param":    []string{"get"},
-		"type":         []string{"json"},
+	values := tra.apiValues()
+	values.Add("api_name", TERMROOT)
+	values.Add("api_param", "get")
+	if request != nil {
+		values.Add("lang_s", request.LangS)
+		values.Add("lang_t", request.LangT)
+		values.Add("order", request.Order)
+		values.Add("limit", request.Limit)
+		values.Add("offset", request.Offset)
 	}
+
 	ret, err := tra.apiPost(values)
 	if err != nil {
 		return nil, err

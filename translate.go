@@ -3,7 +3,6 @@ package textra
 import (
 	"encoding/json"
 	"fmt"
-	"net/url"
 )
 
 // Machine translation request.
@@ -111,24 +110,20 @@ type MTInformation struct {
 	} `json:"sentence"`
 }
 
-func (tra *TexTra) Translate(apiType string, original string) (string, error) {
-	data, err := tra.TranslateRaw(apiType, original)
+func (tra *TexTra) Translate(apiType string, source string) (string, error) {
+	data, err := tra.TranslateRaw(apiType, source)
 	if err != nil {
 		return "", err
 	}
 	return data.Resultset.Result.Text, nil
 }
 
-func (tra *TexTra) TranslateRaw(apiType string, original string) (*MTResult, error) {
-	values := url.Values{
-		"access_token": []string{tra.token.AccessToken},
-		"key":          []string{tra.ClientID},
-		"api_name":     []string{MT},
-		"api_param":    []string{apiType},
-		"name":         []string{tra.Name},
-		"type":         []string{"json"},
-		"text":         []string{original},
-	}
+func (tra *TexTra) TranslateRaw(apiType string, source string) (*MTResult, error) {
+	values := tra.apiValues()
+	values.Add("api_name", MT)
+	values.Add("api_param", apiType)
+	values.Add("text", source)
+
 	ret, err := tra.apiPost(values)
 	if err != nil {
 		return nil, err
