@@ -6,7 +6,7 @@ import (
 	"net/url"
 )
 
-// Glossary Entries.
+// Glossary entries.
 const TERM = "term"
 
 type TermSearchRequest struct {
@@ -40,7 +40,7 @@ type TermSearchTerm struct {
 	Target string `json:"target"`
 }
 
-func (tra TexTra) TermSearch(request *TermSearchRequest) ([]TermSearchTerm, error) {
+func (tra *TexTra) TermSearch(request *TermSearchRequest) ([]TermSearchTerm, error) {
 	values := tra.apiValues()
 	values.Add("api_name", TERM)
 	values.Add("api_param", "search")
@@ -63,7 +63,7 @@ func (tra TexTra) TermSearch(request *TermSearchRequest) ([]TermSearchTerm, erro
 	return result.Resultset.Result.Term, nil
 }
 
-func (tra TexTra) TermSearchDecode(ret []byte) (*TermSearchResult, error) {
+func (tra *TexTra) TermSearchDecode(ret []byte) (*TermSearchResult, error) {
 	result := new(TermSearchResult)
 	if err := json.Unmarshal(ret, result); err != nil {
 		return nil, err
@@ -88,7 +88,7 @@ type TermSetResult struct {
 	} `json:"resultset"`
 }
 
-func (tra TexTra) TermSet(pid string, textS string, textT string) (int, int, error) {
+func (tra *TexTra) TermSet(pid string, textS string, textT string) (int, int, error) {
 	values := tra.apiValues()
 	values.Add("api_name", TERM)
 	values.Add("api_param", "set")
@@ -98,7 +98,7 @@ func (tra TexTra) TermSet(pid string, textS string, textT string) (int, int, err
 	return tra.termSet(values)
 }
 
-func (tra TexTra) TermUpdate(pid string, cid string, textS string, textT string) (int, int, error) {
+func (tra *TexTra) TermUpdate(pid string, cid string, textS string, textT string) (int, int, error) {
 	values := tra.apiValues()
 	values.Add("api_name", TERM)
 	values.Add("api_param", "update")
@@ -109,7 +109,7 @@ func (tra TexTra) TermUpdate(pid string, cid string, textS string, textT string)
 	return tra.termSet(values)
 }
 
-func (tra TexTra) TermDel(pid string, cid string) (int, int, error) {
+func (tra *TexTra) TermDel(pid string, cid string) (int, int, error) {
 	values := tra.apiValues()
 	values.Add("api_name", TERM)
 	values.Add("api_param", "delete")
@@ -118,7 +118,7 @@ func (tra TexTra) TermDel(pid string, cid string) (int, int, error) {
 	return tra.termSet(values)
 }
 
-func (tra TexTra) termSet(values url.Values) (int, int, error) {
+func (tra *TexTra) termSet(values url.Values) (int, int, error) {
 	ret, err := tra.apiPost(values)
 	if err != nil {
 		return 0, 0, err

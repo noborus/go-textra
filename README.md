@@ -1,6 +1,8 @@
 # go-textra
 
-This is a library that translates with [みんなの自動翻訳(minnano-jidou-honyaku)@textra's](https://mt-auto-minhon-mlt.ucri.jgn-x.jp/) API.
+[![Go Reference](https://pkg.go.dev/badge/github.com/noborus/go-textra.svg)](https://pkg.go.dev/github.com/noborus/go-textra)
+
+This is a library that translates with [みんなの自動翻訳(minnano-jidou-honyaku)@textra's](https://mt-auto-minhon-mlt.ucri.jgn-x.jp/) API clinet.
 
 You need a [textra](https://mt-auto-minhon-mlt.ucri.jgn-x.jp/) account.
 

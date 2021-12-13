@@ -12,23 +12,24 @@ import (
 
 const APIURL = "https://mt-auto-minhon-mlt.ucri.jgn-x.jp/"
 
+// API Process error code.
 const (
-	APIKeyError                     = 500
-	NameError                       = 501
-	MaximumRequestDayError          = 502
-	MaximumRequestMinError          = 504
-	MaximumRequestSimultaneousError = 505
-	OAuthAuthenticationError        = 510
-	OAuthHeaderError                = 511
-	AccessURLError                  = 520
-	AccessURL2Error                 = 521
-	RequestKeyError                 = 522
-	RequestNameError                = 523
-	RequestParameterError           = 524
-	RequestParameterSizeError       = 525
-	AuthorizationError              = 530
-	ExecutionError                  = 531
-	Nodata                          = 532
+	APIKeyError                     = 500 // API key error
+	NameError                       = 501 // Name error
+	MaximumRequestDayError          = 502 // Maximum request error(day)
+	MaximumRequestMinError          = 504 // Maximum request error(min)
+	MaximumRequestSimultaneousError = 505 // Maximum request error (simultaneous requests)
+	OAuthAuthenticationError        = 510 // OAuth authentication error
+	OAuthHeaderError                = 511 // OAuth header error
+	AccessURLError                  = 520 // Access URL error
+	AccessURL2Error                 = 521 // Access URL error
+	RequestKeyError                 = 522 // Request key error
+	RequestNameError                = 523 // Request name error
+	RequestParameterError           = 524 // Request parameter error
+	RequestParameterSizeError       = 525 // Request parameter error (for data size limit)
+	AuthorizationError              = 530 // Authorization error
+	ExecutionError                  = 531 // Execution error
+	Nodata                          = 532 // No data
 )
 
 var errorText = map[int]string{
@@ -74,13 +75,13 @@ func New(c Config) (*TexTra, error) {
 		TokenURL:     APIURL + "oauth2/token.php",
 	}
 
-	client := conf.Client(ctx)
 	token, err := conf.Token(ctx)
 	if err != nil {
 		return nil, err
 	}
+
 	api := TexTra{}
-	api.client = client
+	api.client = conf.Client(ctx)
 	api.token = token
 	api.ClientID = c.ClientID
 	api.ClientSecret = c.ClientSecret

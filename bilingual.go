@@ -6,7 +6,10 @@ import (
 	"net/url"
 )
 
-// Bilingual Text Entries.
+// A library for registering, updating, deleting, and searching bilingual collections.
+// Operate the id (pid) managed by Billingual_root.
+
+// Bilingual entries.
 const BILINGUAL = "bilingual"
 
 type BilingualSearchRequest struct {
@@ -40,7 +43,7 @@ type BilingualSearchItem struct {
 	Target string `json:"target"`
 }
 
-func (tra TexTra) BilingualSearch(request *BilingualSearchRequest) ([]BilingualSearchItem, error) {
+func (tra *TexTra) BilingualSearch(request *BilingualSearchRequest) ([]BilingualSearchItem, error) {
 	values := tra.apiValues()
 	values.Add("api_name", BILINGUAL)
 	values.Add("api_param", "search")
@@ -63,7 +66,7 @@ func (tra TexTra) BilingualSearch(request *BilingualSearchRequest) ([]BilingualS
 	return result.Resultset.Result.Bilingual, nil
 }
 
-func (tra TexTra) BilingualSearchDecode(ret []byte) (*BilingualSearchResult, error) {
+func (tra *TexTra) BilingualSearchDecode(ret []byte) (*BilingualSearchResult, error) {
 	result := new(BilingualSearchResult)
 	if err := json.Unmarshal(ret, result); err != nil {
 		return nil, err
@@ -89,7 +92,7 @@ type BilingualSetResult struct {
 	} `json:"resultset"`
 }
 
-func (tra TexTra) BilingualSet(pid string, textS string, textT string) (int, int, error) {
+func (tra *TexTra) BilingualSet(pid string, textS string, textT string) (int, int, error) {
 	values := tra.apiValues()
 	values.Add("api_name", BILINGUAL)
 	values.Add("api_param", "set")
@@ -98,7 +101,7 @@ func (tra TexTra) BilingualSet(pid string, textS string, textT string) (int, int
 	return tra.bilingualSet(values)
 }
 
-func (tra TexTra) BilingualUpdate(pid string, cid string, textS string, textT string) (int, int, error) {
+func (tra *TexTra) BilingualUpdate(pid string, cid string, textS string, textT string) (int, int, error) {
 	values := tra.apiValues()
 	values.Add("api_name", BILINGUAL)
 	values.Add("api_param", "update")
@@ -109,7 +112,7 @@ func (tra TexTra) BilingualUpdate(pid string, cid string, textS string, textT st
 	return tra.bilingualSet(values)
 }
 
-func (tra TexTra) BilingualDelete(pid string, cid string) (int, int, error) {
+func (tra *TexTra) BilingualDelete(pid string, cid string) (int, int, error) {
 	values := tra.apiValues()
 	values.Add("api_name", BILINGUAL)
 	values.Add("api_param", "delete")
@@ -118,7 +121,7 @@ func (tra TexTra) BilingualDelete(pid string, cid string) (int, int, error) {
 	return tra.bilingualSet(values)
 }
 
-func (tra TexTra) bilingualSet(values url.Values) (int, int, error) {
+func (tra *TexTra) bilingualSet(values url.Values) (int, int, error) {
 	ret, err := tra.apiPost(values)
 	if err != nil {
 		return 0, 0, err

@@ -37,7 +37,7 @@ type LookupItem struct {
 	} `json:"term"`
 }
 
-func (tra TexTra) Lookup(text string, pid string, lang_s string) ([]LookupItem, error) {
+func (tra *TexTra) Lookup(text string, pid string, lang_s string) ([]LookupItem, error) {
 	values := url.Values{
 		"access_token": []string{tra.token.AccessToken},
 		"key":          []string{tra.ClientID},

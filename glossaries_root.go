@@ -5,7 +5,7 @@ import (
 	"fmt"
 )
 
-// List of glossaries.
+// List of glossaries entries.
 const TERMROOT = "term_root"
 
 type TermRootRequest struct {

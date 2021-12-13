@@ -5,7 +5,7 @@ import (
 	"fmt"
 )
 
-// Machine translation request.
+// Machine translation request entries.
 const MT = "mt"
 
 // Machine translation engine.
