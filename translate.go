@@ -82,8 +82,8 @@ type MTInformation struct {
 				Translate  struct {
 					Reverse []struct {
 						Selected int    `json:"selected"`
-						IdN      int    `json:"id-n"`
-						IdR      int    `json:"id-r"`
+						IDN      int    `json:"id-n"`
+						IDR      int    `json:"id-r"`
 						NameN    string `json:"name-n"`
 						NameR    string `json:"name-r"`
 						TextS    string `json:"text-s"`

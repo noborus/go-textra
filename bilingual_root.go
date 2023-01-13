@@ -5,7 +5,7 @@ import (
 	"fmt"
 )
 
-//  List of bilingual entries.
+// List of bilingual entries.
 const BILINGUALROOT = "bilingual_root"
 
 type BilingualRootRequest struct {

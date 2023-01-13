@@ -58,6 +58,7 @@ func (tra *TexTra) BilingualSearch(request *BilingualSearchRequest) ([]Bilingual
 	if err != nil {
 		return nil, err
 	}
+
 	result, err := tra.BilingualSearchDecode(ret)
 	if err != nil {
 		return nil, err
@@ -71,11 +72,11 @@ func (tra *TexTra) BilingualSearchDecode(ret []byte) (*BilingualSearchResult, er
 	if err := json.Unmarshal(ret, result); err != nil {
 		return nil, err
 	}
+
 	if result.Resultset.Code != 0 {
 		return result, fmt.Errorf("%d: %s", result.Resultset.Code, errorText[result.Resultset.Code])
 	}
 	return result, nil
-
 }
 
 type BilingualSetResult struct {
