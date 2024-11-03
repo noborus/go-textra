@@ -53,14 +53,14 @@ func (tra *TexTra) Lookup(text string, pid string, langS string) ([]LookupItem, 
 		return nil, err
 	}
 
-	data, err := lookupDecodee(ret)
+	data, err := lookupDecode(ret)
 	if err != nil {
 		return nil, err
 	}
 	return data.Resultset.Result.Lookup, nil
 }
 
-func lookupDecodee(jsonStr []byte) (*LookUpResult, error) {
+func lookupDecode(jsonStr []byte) (*LookUpResult, error) {
 	result := new(LookUpResult)
 	if err := json.Unmarshal(jsonStr, result); err != nil {
 		return nil, err

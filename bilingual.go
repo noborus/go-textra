@@ -7,7 +7,7 @@ import (
 )
 
 // A library for registering, updating, deleting, and searching bilingual collections.
-// Operate the id (pid) managed by Billingual_root.
+// Operate the id (pid) managed by Bilingual_root.
 
 // Bilingual entries.
 const BILINGUAL = "bilingual"
